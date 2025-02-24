@@ -30,7 +30,7 @@ jobs:
 
       - name: Install KiCad libraries
         if: >-
-          ${{ steps.apt-install.outputs.cache-hit }} != 'true' ||
+          ${{ steps.apt-install.outputs.cache-hit }} != 'true'
         run: |
           sudo mkdir -p /home/runner/.config/kicad/${{ env.KICAD_VERSION }}
           sudo cp /usr/share/kicad/template/*-lib-table /home/runner/.config/kicad/${{ env.KICAD_VERSION }}
