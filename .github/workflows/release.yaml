@@ -52,9 +52,10 @@ jobs:
       # Zip the output
       - name: Install zip
         uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r ${{ env.projectName }}.zip .
-          working-directory: ${{ env.OutputFolder }}
+
+      - name: Zip output
+        run: zip -qq -r ${{ env.projectName }}.zip .
+        working-directory: ${{ env.OutputFolder }}
 
       # Upload all the zip files to the release.
       - name: Upload release files
@@ -64,5 +65,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            ${{ env.OutputFolder }}/${{ env.projectName }}-schematic.pdf
-            ${{ env.OutputFolder }}/${{ env.projectName }}.zip
+            ${{ env.outputFolder }}/${{ env.projectName }}-schematic.pdf
+            ${{ env.outputFolder }}/${{ env.projectName }}.zip
