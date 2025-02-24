@@ -13,27 +13,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Install KiCad CLI
-      run: |
-        sudo add-apt-repository ppa:kicad/kicad-9.0-releases
-        sudo apt update
-        sudo apt install kicad
-        sudo mkdir -p /home/runner/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
-        sudo cp /usr/share/kicad/template/*-lib-table /home/runner/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
+      - name: Add APT repository
+        run: sudo add-apt-repository ppa:kicad/kicad-9.0-releases
 
-    - name: Run kicad-cli ERC
-      run: |
-        kicad-cli sch erc dm13a-breakout-board.kicad_sch
+      - uses: ./github/actions/use-apt-tools
+        with:
+          tools: kicad
 
-    - name: Run kicad-cli DRC
-      run: |
-        kicad-cli pcb drc dm13a-breakout-board.kicad_pcb
+      - name: Install libraries
+        run: |
+          sudo mkdir -p /home/runner/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
+          sudo cp /usr/share/kicad/template/*-lib-table /home/runner/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
 
-    - name: Attach reports
-      uses: actions/upload-artifact@v4
-      with:
-        name: report
-        path: "*.rpt"
+      - name: Run kicad-cli ERC
+        run: |
+          kicad-cli sch erc dm13a-breakout-board.kicad_sch
+
+      - name: Run kicad-cli DRC
+        run: |
+          kicad-cli pcb drc dm13a-breakout-board.kicad_pcb
+
+      - name: Attach reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: "*.rpt"
