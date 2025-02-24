@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: kicad/kicad:9.0 # Note: All commands will run using sh not bash
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run kicad-cli ERC
+      run: |
+        kicad-cli sch erc --exit-code-violations dm13a-breakout-board.kicad_sch
+        if [ $? -eq 5 ]; then
+          exit 1
+        fi
+
+    - name: Run kicad-cli DRC
+      run: |
+        kicad-cli pcb drc --exit-code-violations dm13a-breakout-board.kicad_pcb
+        if [ $? -eq 5 ]; then
+          exit 1
+        fi
