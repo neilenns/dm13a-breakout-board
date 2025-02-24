@@ -11,7 +11,7 @@ on:
 env:
   version: "0.0.${{ github.event.number }}.${{ github.run_number }}"
   outputFolder: "release"
-  projectName: "dm13a-breakout-board"
+  projectName: "${{ github.event.repository.name }}"
   Timezone: "America/Los_Angeles"
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
 
       - name: Generate PDF
         run: |
-          kicad-cli sch export pdf -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --output ${{ env.outputFolder }}/${{ env.projectName }}.pdf ${{ env.projectName }}.kicad_sch
+          kicad-cli sch export pdf -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --output ${{ env.outputFolder }}/${{ env.projectName }}-schematic.pdf ${{ env.projectName }}.kicad_sch
 
       - name: Generate BOM
         run: |
