@@ -11,29 +11,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: ghcr.io/neilenns/kicad:latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Install and cache KiCad
-        uses: ./.github/actions/use-apt-tools
-        id: apt-install
-        with:
-          ppaRepositories: >-
-            ppa:kicad/kicad-9.0-releases
-          tools: kicad
-          method: timestamp
-
-      - name: Get KiCad installed version
-        run: echo "KICAD_VERSION=$(kicad-cli -v | cut -d . -f 1,2)" >> $GITHUB_ENV
-
-      - name: Install KiCad libraries
-        if: >-
-          ${{ steps.apt-install.outputs.cache-hit }} != 'true'
-        run: |
-          sudo mkdir -p /home/runner/.config/kicad/${{ env.KICAD_VERSION }}
-          sudo cp /usr/share/kicad/template/*-lib-table /home/runner/.config/kicad/${{ env.KICAD_VERSION }}
 
       - name: Run kicad-cli ERC
         run: |

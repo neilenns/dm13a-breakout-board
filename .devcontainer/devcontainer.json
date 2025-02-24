@@ -1,6 +1,6 @@
 {
   "name": "KiCad Development Container",
-  "image": "kicad/kicad:9.0",
+  "image": "ghcr.io/neilenns/kicad:latest",
   "features": {
     "ghcr.io/neilenns/devcontainer-features/oh-my-zsh:1": {
       "stripWorkspacesFromPrompt": true
