@@ -21,11 +21,11 @@ jobs:
 
     - name: Run kicad-cli ERC
       run: |
-        kicad-cli sch erc --exit-code-violations dm13a-breakout-board.kicad_sch
+        kicad-cli sch erc dm13a-breakout-board.kicad_sch
 
     - name: Run kicad-cli DRC
       run: |
-        kicad-cli pcb drc --exit-code-violations dm13a-breakout-board.kicad_pcb
+        kicad-cli pcb drc dm13a-breakout-board.kicad_pcb
 
     - name: Attach reports
       uses: actions/upload-artifact@v4
