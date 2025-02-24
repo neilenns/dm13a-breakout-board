@@ -38,6 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release
-          path: |
-            "*.pdf"
-            "*.csv"
+          path: "${{ env.outputFolder }}/"
