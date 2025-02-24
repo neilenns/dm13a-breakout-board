@@ -8,6 +8,11 @@ on:
     branches:
       - main
 
+env:
+  version: "0.0.${{ github.event.number }}.${{ github.run_number }}"
+  outputFolder: "release"
+  Timezone: America/Los_Angeles
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,16 +22,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run kicad-cli ERC
-        run: |
-          kicad-cli sch erc dm13a-breakout-board.kicad_sch
+      - name: Get current date
+        id: date
+        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
-      - name: Run kicad-cli DRC
-        run: |
-          kicad-cli pcb drc dm13a-breakout-board.kicad_pcb
+      # Get the version from the workflow input. This is only valid
+      # when run manually as a workflow.
+      - name: Store workflow version
+        id: save_workflow_version
+        run: echo "version=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+        if: startsWith(github.ref, 'refs/tags/') == false
 
-      - name: Attach reports
+      - name: Generate PDF
+        run: |
+          kicad-cli sch export pdf -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --output ${{ env.outputFolder }}/dm13a-breakout-board.pdf dm13a-breakout-board.kicad_sch
+
+      - name: Generate BOM
+        run: |
+          kicad-cli sch export bom -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --preset JLCPCB --output ${{ env.outputFolder }}/dm13a-breakout-board.csv dm13a-breakout-board.kicad_sch
+
+      - name: Attach output
         uses: actions/upload-artifact@v4
         with:
-          name: report
-          path: "*.rpt"
+          name: release
+          path: |
+            "*.pdf"
+            "*.csv"
