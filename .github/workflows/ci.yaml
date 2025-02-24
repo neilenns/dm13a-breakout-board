@@ -19,6 +19,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Copy libary files
+      run: |
+        mkdir -p /home/root/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
+        cp /usr/share/kicad/template/*-lib-table /home/root/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
+
     - name: Run kicad-cli ERC
       run: |
         kicad-cli sch erc dm13a-breakout-board.kicad_sch
