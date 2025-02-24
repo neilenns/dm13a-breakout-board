@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  version: "0.0.${{ github.event.number }}.${{ github.run_number }}"
+  outputFolder: "release"
+  projectName: "${{ github.event.repository.name }}"
+  Timezone: "America/Los_Angeles"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/neilenns/kicad:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get current date
+        id: date
+        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Generate PDF
+        run: |
+          kicad-cli sch export pdf -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --output ${{ env.outputFolder }}/${{ env.projectName }}-schematic.pdf ${{ env.projectName }}.kicad_sch
+
+      - name: Generate BOM
+        run: |
+          kicad-cli sch export bom --preset JLCPCB --output ${{ env.outputFolder }}/${{ env.projectName }}.csv ${{ env.projectName }}.kicad_sch
+
+      - name: Attach output
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: "${{ env.outputFolder }}/"
