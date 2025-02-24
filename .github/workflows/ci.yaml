@@ -28,6 +28,6 @@ jobs:
         kicad-cli pcb drc --exit-code-violations dm13a-breakout-board.kicad_pcb
 
     - name: Attach reports
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: dm13a-breakout-board-erc.rpt
