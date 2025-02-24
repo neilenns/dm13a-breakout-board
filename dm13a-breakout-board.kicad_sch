@@ -943,8 +943,8 @@
 					)
 				)
 			)
-			(property "Value" ""
-				(at 0 0 0)
+			(property "Value" "DM13A"
+				(at -7.112 25.4 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -9424,14 +9424,6 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB part number" ""
-			(at 24.13 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(pin "2"
 			(uuid "1605bdfb-6145-4817-bed8-ac15fc3dc7c4")
 		)
@@ -9502,22 +9494,20 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB part number" "C14663"
+		(property "LCSC package" "0603"
 			(at 17.78 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "JLCPCB package" "0603"
+		(property "LCSC Part #" "C14663"
 			(at 17.78 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(pin "2"
@@ -9588,14 +9578,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "JLCPCB part number" ""
-			(at 74.93 25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(pin "1"
@@ -9743,14 +9725,6 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB part number" ""
-			(at 36.83 24.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(pin "1"
 			(uuid "20630318-bde5-436c-8f50-3020f7bda39a")
 		)
@@ -9819,14 +9793,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "JLCPCB part number" ""
-			(at 64.77 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(pin "15"
@@ -10102,7 +10068,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "~"
+		(property "Value" "DM13A"
 			(at 42.7833 60.96 0)
 			(effects
 				(font
@@ -10138,14 +10104,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "JLCPCB part number" ""
-			(at 40.64 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(pin "2"
