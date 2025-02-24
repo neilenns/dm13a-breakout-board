@@ -1,0 +1,10 @@
+{
+  "name": "KiCad Development Container",
+  "image": "kicad/kicad:9.0",
+  "features": {
+    "ghcr.io/neilenns/devcontainer-features/oh-my-zsh:1": {
+      "stripWorkspacesFromPrompt": true
+    },
+    "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {}
+  }
+}
