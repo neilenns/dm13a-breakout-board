@@ -22,13 +22,12 @@ jobs:
     - name: Run kicad-cli ERC
       run: |
         kicad-cli sch erc --exit-code-violations dm13a-breakout-board.kicad_sch
-        if [ $? -eq 5 ]; then
-          exit 1
-        fi
 
     - name: Run kicad-cli DRC
       run: |
         kicad-cli pcb drc --exit-code-violations dm13a-breakout-board.kicad_pcb
-        if [ $? -eq 5 ]; then
-          exit 1
-        fi
+
+    - name: Attach reports
+      uses: actions/upload-artifact@v2
+      with:
+        name: dm13a-breakout-board-erc.rpt
