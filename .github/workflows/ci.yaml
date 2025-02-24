@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: kicad/kicad:9.0 # Note: All commands will run using sh not bash
-      env:
-        USER: "root"
+      options: --user root
 
     steps:
     - name: Checkout repository
