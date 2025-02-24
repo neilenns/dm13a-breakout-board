@@ -16,11 +16,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Add APT repository
-        run: sudo add-apt-repository ppa:kicad/kicad-9.0-releases
-
       - uses: ./.github/actions/use-apt-tools
         with:
+          ppaRepositories: >-
+            ppa:kicad/kicad-9.0-releases
           tools: kicad
 
       - name: Install libraries

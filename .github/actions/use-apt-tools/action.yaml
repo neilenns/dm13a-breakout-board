@@ -10,6 +10,8 @@ inputs:
   cache: { required: false, type: string, default: yes }
   key: { required: false, type: string }
   method: { required: false, type: string, default: package }
+  ppaRepositories: { required: false, type: string }
+  cloudRepositories: { required: false, type: string }
   path:
     required: false
     type: string
@@ -65,6 +67,26 @@ runs:
         archive="${{ steps.setup.outputs.archive }}"
         ls -l $archive
         [ -f $archive ] && sudo tar -C / -xvzf $archive
+
+    - id: add-ppa-repository
+      if: >-
+        steps.setup.outputs.cache-hit != 'true' &&
+        inputs.ppaRepositories
+      shell: bash
+      run: |
+        for repo in ${{ inputs.ppaRepositories }}; do
+          sudo add-apt-repository --yes --ppa $repo
+        done
+
+    - id: add-cloud-repository
+      if: >-
+        steps.setup.outputs.cache-hit != 'true' &&
+        inputs.cloudRepositories
+      shell: bash
+      run: |
+        for repo in ${{ inputs.cloudRepositories }}; do
+          sudo add-apt-repository --yes --cloud $repo
+        done
 
     - id: install-and-archive
       if: >-
