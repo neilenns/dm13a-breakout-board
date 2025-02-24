@@ -26,13 +26,6 @@ jobs:
         id: date
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
-      # Get the version from the workflow input. This is only valid
-      # when run manually as a workflow.
-      - name: Store workflow version
-        id: save_workflow_version
-        run: echo "version=${{ github.event.inputs.version }}" >> $GITHUB_ENV
-        if: startsWith(github.ref, 'refs/tags/') == false
-
       - name: Generate PDF
         run: |
           kicad-cli sch export pdf -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --output ${{ env.outputFolder }}/dm13a-breakout-board.pdf dm13a-breakout-board.kicad_sch
