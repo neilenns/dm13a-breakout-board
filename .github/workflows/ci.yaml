@@ -32,7 +32,7 @@ jobs:
 
       - name: Generate BOM
         run: |
-          kicad-cli sch export bom -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --preset JLCPCB --output ${{ env.outputFolder }}/dm13a-breakout-board.csv dm13a-breakout-board.kicad_sch
+          kicad-cli sch export bom --preset JLCPCB --output ${{ env.outputFolder }}/dm13a-breakout-board.csv dm13a-breakout-board.kicad_sch
 
       - name: Attach output
         uses: actions/upload-artifact@v4
