@@ -20,6 +20,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Copy libary files
+      shell: bash
       run: |
         mkdir -p /home/root/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
         cp /usr/share/kicad/template/*-lib-table /home/root/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
