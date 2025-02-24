@@ -16,9 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Get KiCad installed version
-        run: echo "KICAD_VERSION=$(kicad-cli -v | cut -d . -f 1,2)" >> $GITHUB_ENV
-
       - name: Install and cache KiCad
         uses: ./.github/actions/use-apt-tools
         id: apt-install
@@ -26,6 +23,9 @@ jobs:
           ppaRepositories: >-
             ppa:kicad/kicad-9.0-releases
           tools: kicad
+
+      - name: Get KiCad installed version
+        run: echo "KICAD_VERSION=$(kicad-cli -v | cut -d . -f 1,2)" >> $GITHUB_ENV
 
       - name: Cache KiCad libraries
         id: cache-libraries
