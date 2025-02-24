@@ -11,21 +11,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: kicad/kicad:9.0 # Note: All commands will run using sh not bash
-      options: --user root
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Install KiCad CLI
+      run: |
+        add-apt-repository ppa:kicad/kicad-9.0-releases
+        apt update
+        apt install kicad
+
     - name: Run kicad-cli ERC
       run: |
-        sudo -u kicad kicad-cli sch erc dm13a-breakout-board.kicad_sch
+        kicad-cli sch erc dm13a-breakout-board.kicad_sch
 
     - name: Run kicad-cli DRC
       run: |
-        sudo -u kicad kicad-cli pcb drc dm13a-breakout-board.kicad_pcb
+        kicad-cli pcb drc dm13a-breakout-board.kicad_pcb
 
     - name: Attach reports
       uses: actions/upload-artifact@v4
