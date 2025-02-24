@@ -11,7 +11,8 @@ on:
 env:
   version: "0.0.${{ github.event.number }}.${{ github.run_number }}"
   outputFolder: "release"
-  Timezone: America/Los_Angeles
+  projectName: "dm13a-breakout-board"
+  Timezone: "America/Los_Angeles"
 
 jobs:
   build:
@@ -28,11 +29,11 @@ jobs:
 
       - name: Generate PDF
         run: |
-          kicad-cli sch export pdf -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --output ${{ env.outputFolder }}/dm13a-breakout-board.pdf dm13a-breakout-board.kicad_sch
+          kicad-cli sch export pdf -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --output ${{ env.outputFolder }}/${{ env.projectName }}.pdf ${{ env.projectName }}.kicad_sch
 
       - name: Generate BOM
         run: |
-          kicad-cli sch export bom --preset JLCPCB --output ${{ env.outputFolder }}/dm13a-breakout-board.csv dm13a-breakout-board.kicad_sch
+          kicad-cli sch export bom --preset JLCPCB --output ${{ env.outputFolder }}/${{ env.projectName }}.csv ${{ env.projectName }}.kicad_sch
 
       - name: Attach output
         uses: actions/upload-artifact@v4
