@@ -19,7 +19,7 @@ jobs:
       - name: Add APT repository
         run: sudo add-apt-repository ppa:kicad/kicad-9.0-releases
 
-      - uses: ./github/actions/use-apt-tools
+      - uses: ./.github/actions/use-apt-tools
         with:
           tools: kicad
 
