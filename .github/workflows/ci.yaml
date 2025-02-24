@@ -23,22 +23,14 @@ jobs:
           ppaRepositories: >-
             ppa:kicad/kicad-9.0-releases
           tools: kicad
+          method: timestamp
 
       - name: Get KiCad installed version
         run: echo "KICAD_VERSION=$(kicad-cli -v | cut -d . -f 1,2)" >> $GITHUB_ENV
 
-      - name: Cache KiCad libraries
-        id: cache-libraries
-        uses: actions/cache@v4
-        with:
-          path: |
-            /home/runner/.config/kicad
-          key: kicad-libraries-${{ env.KICAD_VERSION}}-
-
       - name: Install KiCad libraries
         if: >-
           ${{ steps.apt-install.outputs.cache-hit }} != 'true' ||
-          ${{ steps.cache-libraries.outputs.cache-hit }} != 'true'
         run: |
           sudo mkdir -p /home/runner/.config/kicad/${{ env.KICAD_VERSION }}
           sudo cp /usr/share/kicad/template/*-lib-table /home/runner/.config/kicad/${{ env.KICAD_VERSION }}
