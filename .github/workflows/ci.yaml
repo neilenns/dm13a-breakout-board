@@ -19,19 +19,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Copy libary files
-      shell: bash
-      run: |
-        mkdir -p /home/root/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
-        cp /usr/share/kicad/template/*-lib-table /home/root/.config/kicad/$(kicad-cli -v | cut -d . -f 1,2)
-
     - name: Run kicad-cli ERC
       run: |
-        kicad-cli sch erc dm13a-breakout-board.kicad_sch
+        sudo -u kicad kicad-cli sch erc dm13a-breakout-board.kicad_sch
 
     - name: Run kicad-cli DRC
       run: |
-        kicad-cli pcb drc dm13a-breakout-board.kicad_pcb
+        sudo -u kicad kicad-cli pcb drc dm13a-breakout-board.kicad_pcb
 
     - name: Attach reports
       uses: actions/upload-artifact@v4
