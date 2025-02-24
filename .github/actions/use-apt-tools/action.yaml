@@ -70,7 +70,7 @@ runs:
 
     - id: add-ppa-repository
       if: >-
-        steps.setup.outputs.cache-hit != 'true' &&
+        steps.cache.outputs.cache-hit != 'true' &&
         inputs.ppaRepositories
       shell: bash
       run: |
@@ -80,7 +80,7 @@ runs:
 
     - id: add-cloud-repository
       if: >-
-        steps.setup.outputs.cache-hit != 'true' &&
+        steps.cache.outputs.cache-hit != 'true' &&
         inputs.cloudRepositories
       shell: bash
       run: |

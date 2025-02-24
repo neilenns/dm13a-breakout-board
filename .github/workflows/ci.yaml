@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - uses: ./.github/actions/use-apt-tools
+        id: apt-install
         with:
           ppaRepositories: >-
             ppa:kicad/kicad-9.0-releases
