@@ -18,9 +18,9 @@ jobs:
 
     - name: Install KiCad CLI
       run: |
-        add-apt-repository ppa:kicad/kicad-9.0-releases
-        apt update
-        apt install kicad
+        sudo add-apt-repository ppa:kicad/kicad-9.0-releases
+        sudo apt update
+        sudo apt install kicad
 
     - name: Run kicad-cli ERC
       run: |
