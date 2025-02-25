@@ -13,6 +13,8 @@ on:
 env:
   outputFolder: "release"
   projectName: "${{ github.event.repository.name }}"
+  date: "not set" # This gets set by the date step
+  version: "not set" # This gets set by the get_github_version or workflow_dispatch input
   Timezone: "America/Los_Angeles"
 
 jobs:
@@ -20,75 +22,60 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/neilenns/kicad:latest
     defaults:
-        run:
-          shell: bash
+      run:
+        shell: bash
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Get current date
         id: date
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
       # Get the version of the GitHub release for use later. This is only valid
-      # when run in a release context
+      # when run in a release context.
       - name: Get GitHub release version
+        id: get_github_version
         uses: dhkatz/get-version-action@v3.0.0
-        if: startsWith(github.ref, 'refs/tags/')
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
 
       - name: Store GitHub release version
         run: echo "version=${{ steps.get_github_version.outputs.version }}" >> $GITHUB_ENV
-        if: startsWith(github.ref, 'refs/tags/')
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
 
+      # Stores the provided version from a manual run of the workflow in the environment variable
+      # so it is available to the rest of the workflow.
       - name: Store GitHub release version
         run: echo "version=${{ inputs.version }}" >> $GITHUB_ENV
-        if: "!startsWith(github.ref, 'refs/tags/')"
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
 
-      # Generate the various files
-      - name: Generate PDF
-        run: |
-          kicad-cli sch export pdf -D VERSION=${{ env.version }} -D DATE=${{ env.DATE }} --output ${{ env.outputFolder }}/${{ env.projectName }}-schematic.pdf ${{ env.projectName }}.kicad_sch
+      # Update variables in the project file since variables can't be set on the job command.
+      - name: Update project variables
+        uses: restackio/update-json-file-action@2.1
+        with:
+          file: ${{ env.projectName }}.kicad_pro
+          fields: "{'text_variables.DATE': '${{ env.DATE }}', 'text_variables.VERSION': '${{ env.version }}'}"
 
-      - name: Generate BOM
-        run: |
-          kicad-cli sch export bom --preset JLCPCB --output ${{ env.outputFolder }}/${{ env.projectName }}.csv ${{ env.projectName }}.kicad_sch
-    
-      - name: Generate gerbers
-        run: |
-            kicad-cli pcb export gerbers \
-            -D VERSION=${{ env.version }} \
-            -D DATE=${{ env.DATE }} \
-            --layers F.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts \
-            --subtract-soldermask \
-            --output ${{ env.outputFolder }}/gerbers \
-            ${{ env.projectName }}.kicad_pcb
+      # Run the KiCad jobset
+      - name: Run KiCad jobset
+        run: >
+          kicad-cli jobset run --file jobs.kicad_jobset ${{ env.projectName }}.kicad_pro
 
-      - name: Generate drill files
-        run: |
-          kicad-cli pcb export drill \
-          --generate-map \
-          --output ${{ env.outputFolder }}/gerbers \
-          ${{ env.projectName }}.kicad_pcb
-          
-      - name: Zip output
-        run: zip -qq -r ${{ env.projectName }}.zip .
-        working-directory: ${{ env.outputFolder }}
-
-      # Upload all the zip files to the release if this is an actual release
+      # Upload the files to the release if this is an actual release
       - name: Upload release files
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
             ${{ env.outputFolder }}/${{ env.projectName }}-schematic.pdf
-            ${{ env.outputFolder }}/${{ env.projectName }}.zip
+            ${{ env.outputFolder }}/${{ env.projectName }}-JLCPCB.zip
 
       # Attach the artifacts to the workflow run if this is not a release
       - name: Attach artifacts
         uses: actions/upload-artifact@v4
-        if: "!startsWith(github.ref, 'refs/tags/')"
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         with:
           path: ${{ env.outputFolder }}/

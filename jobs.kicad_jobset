@@ -1,0 +1,221 @@
+{
+  "jobs": [
+    {
+      "description": "",
+      "id": "c8f5f286-2d49-45ac-a251-462806b995fc",
+      "settings": {
+        "black_and_white": false,
+        "color_theme": "KiCad Classic",
+        "description": "",
+        "drawing_sheet": "",
+        "format": "pdf",
+        "hpgl_page_size": "default",
+        "hpgl_pen_size": 1.016,
+        "hpgl_plot_origin": "A3",
+        "min_pen_width": 847,
+        "output_filename": " ${PROJECTNAME}-schematic.pdf",
+        "page_size": "auto",
+        "pdf_hierarchical_links": true,
+        "pdf_metadata": true,
+        "pdf_property_popups": true,
+        "plot_all": true,
+        "plot_drawing_sheet": true,
+        "use_background_color": true
+      },
+      "type": "sch_export_plot_pdf"
+    },
+    {
+      "description": "",
+      "id": "3cbab78e-22fd-4b88-834f-6339eb7427c7",
+      "settings": {
+        "description": "",
+        "disable_aperture_macros": false,
+        "drawing_sheet": "",
+        "include_netlist_attributes": false,
+        "layers": [
+          "F.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "In3.Cu",
+          "In4.Cu",
+          "In5.Cu",
+          "In6.Cu",
+          "In7.Cu",
+          "In8.Cu",
+          "In9.Cu",
+          "In10.Cu",
+          "In11.Cu",
+          "In12.Cu",
+          "In13.Cu",
+          "In14.Cu",
+          "In15.Cu",
+          "In16.Cu",
+          "In17.Cu",
+          "In18.Cu",
+          "In19.Cu",
+          "In20.Cu",
+          "In21.Cu",
+          "In22.Cu",
+          "In23.Cu",
+          "In24.Cu",
+          "In25.Cu",
+          "In26.Cu",
+          "In27.Cu",
+          "In28.Cu",
+          "In29.Cu",
+          "In30.Cu",
+          "B.Cu",
+          "F.Paste",
+          "B.Paste",
+          "F.SilkS",
+          "B.SilkS",
+          "F.Mask",
+          "B.Mask",
+          "Edge.Cuts"
+        ],
+        "layers_include_on_all": [],
+        "layers_include_on_all_set": false,
+        "layers_to_include_on_all_layers": [],
+        "output_filename": "gerbers/",
+        "plot_drawing_sheet": false,
+        "plot_footprint_values": true,
+        "plot_invisible_text": false,
+        "plot_pad_numbers": false,
+        "plot_ref_des": true,
+        "precision": 5,
+        "subtract_solder_mask_from_silk": true,
+        "use_drill_origin": false,
+        "use_protel_file_extension": true,
+        "use_x2_format": false
+      },
+      "type": "pcb_export_gerbers"
+    },
+    {
+      "description": "",
+      "id": "4e301dc8-2751-45f4-bd99-218f20f805ab",
+      "settings": {
+        "description": "",
+        "drill_origin": "abs",
+        "excellon.combine_pth_npth": false,
+        "excellon.minimal_header": false,
+        "excellon.mirror_y": false,
+        "excellon.oval_drill_route": false,
+        "format": "excellon",
+        "generate_map": true,
+        "gerber_precision": 5,
+        "map_format": "gerberx2",
+        "output_dir": "gerbers",
+        "units": "mm",
+        "zero_format": "decimal"
+      },
+      "type": "pcb_export_drill"
+    },
+    {
+      "description": "",
+      "id": "8aca83ec-f633-44c1-974b-b0cab3b30080",
+      "settings": {
+        "bom_format_preset_name": "CSV",
+        "bom_preset_name": "JLCPCB",
+        "description": "",
+        "exclude_dnp": false,
+        "field_delimiter": ",",
+        "fields_group_by": [
+          "Value",
+          "${DNP}",
+          "${EXCLUDE_FROM_BOM}",
+          "${EXCLUDE_FROM_BOARD}",
+          "Footprint"
+        ],
+        "fields_labels": [
+          "Designator",
+          "Qty",
+          "Comment",
+          "DNP",
+          "Exclude from BOM",
+          "Exclude from Board",
+          "Footprint",
+          "Datasheet",
+          "Description",
+          "#",
+          "LCSC package",
+          "LCSC Part #"
+        ],
+        "fields_ordered": [
+          "Reference",
+          "__${QUANTITY}",
+          "Value",
+          "__${DNP}",
+          "__${EXCLUDE_FROM_BOM}",
+          "__${EXCLUDE_FROM_BOARD}",
+          "__Footprint",
+          "__Datasheet",
+          "__Description",
+          "__${ITEM_NUMBER}",
+          "LCSC package",
+          "LCSC Part #"
+        ],
+        "filter_string": "",
+        "include_excluded_from_bom": true,
+        "keep_line_breaks": false,
+        "keep_tabs": false,
+        "output_filename": " ${PROJECTNAME}.bom",
+        "ref_delimiter": ",",
+        "ref_range_delimiter": "",
+        "sort_asc": true,
+        "sort_field": "Reference",
+        "string_delimiter": "\""
+      },
+      "type": "sch_export_bom"
+    },
+    {
+      "description": "",
+      "id": "bef011ad-c1c5-4cf8-b0ac-411a48af88ae",
+      "settings": {
+        "description": "",
+        "exclude_dnp": false,
+        "exclude_footprints_with_th": false,
+        "format": "csv",
+        "gerber_board_edge": true,
+        "negate_bottom_x": false,
+        "output_filename": " ${PROJECTNAME}.cpl",
+        "side": "both",
+        "single_file": false,
+        "smd_only": false,
+        "units": "mm",
+        "use_drill_place_file_origin": true
+      },
+      "type": "pcb_export_pos"
+    }
+  ],
+  "meta": {
+    "version": 1
+  },
+  "outputs": [
+    {
+      "description": "Schematic",
+      "id": "894f0312-b15d-4c27-ab7d-ed2ad12cf929",
+      "only": [
+        "c8f5f286-2d49-45ac-a251-462806b995fc"
+      ],
+      "settings": {
+        "output_path": "release"
+      },
+      "type": "folder"
+    },
+    {
+      "description": "JLCPCB",
+      "id": "f91336d3-b2ff-48d8-b9b3-7eec61c2327e",
+      "only": [
+        "3cbab78e-22fd-4b88-834f-6339eb7427c7",
+        "4e301dc8-2751-45f4-bd99-218f20f805ab",
+        "8aca83ec-f633-44c1-974b-b0cab3b30080",
+        "bef011ad-c1c5-4cf8-b0ac-411a48af88ae"
+      ],
+      "settings": {
+        "format": "zip",
+        "output_path": "release/${PROJECTNAME}-jlcpcb.zip"
+      },
+      "type": "archive"
+    }
+  ]
+}
