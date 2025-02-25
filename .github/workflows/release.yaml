@@ -19,7 +19,10 @@ jobs:
   FabricationAndDocumentation:
     runs-on: ubuntu-latest
     container: ghcr.io/neilenns/kicad:latest
-
+    defaults:
+        run:
+          shell: bash
+          
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
