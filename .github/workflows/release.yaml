@@ -75,7 +75,7 @@ jobs:
         run: zip -qq -r ${{ env.projectName }}.zip .
         working-directory: ${{ env.outputFolder }}
 
-      # Upload all the zip files to the release.
+      # Upload all the zip files to the release if this is an actual release
       - name: Upload release files
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
@@ -85,3 +85,10 @@ jobs:
           files: |
             ${{ env.outputFolder }}/${{ env.projectName }}-schematic.pdf
             ${{ env.outputFolder }}/${{ env.projectName }}.zip
+
+      # Attach the artifacts to the workflow run if this is not a release
+      - name: Attach artifacts
+        uses: actions/upload-artifact@v2
+        if: "!startsWith(github.ref, 'refs/tags/')"
+        with:
+          name: ${{ env.outputFolder }}/
