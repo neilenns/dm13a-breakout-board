@@ -29,6 +29,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ------------------------------
+      # Variable preparation
+      # ------------------------------
+
       - name: Get current date
         id: date
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
@@ -57,6 +61,10 @@ jobs:
           file: ${{ env.projectName }}.kicad_pro
           fields: "{\"text_variables.DATE\": \"${{ env.DATE }}\", \"text_variables.VERSION\": \"${{ env.version }}\"}"
 
+      # ------------------------------
+      # Output generation
+      # ------------------------------
+
       # Run the KiCad jobset.
       - name: Run KiCad jobset
         run: >
@@ -64,7 +72,11 @@ jobs:
           --file jobs.kicad_jobset 
           ${{ env.projectName }}.kicad_pro
 
-      # JLCPCB needs a bunch of cleanup. First, fix the headers in the position files.
+      # ------------------------------
+      # --- JLCPCB submissions cleanup
+      # ------------------------------
+      
+      # First, fix the headers in the position files.
       - name: JLCPCB - Update position file headers
         run: >
           sed -i 
@@ -83,6 +95,10 @@ jobs:
         run: >
           zip -r ${{ env.outputFolder }}/${{ env.projectName }}-JLCPCB.zip
           ${{ env.outputFolder}}/JLCPCB/* 
+
+      # ------------------------------
+      # Asset upload
+      # ------------------------------
 
       # Upload the files to the release if this is an actual release.
       - name: Upload release files
