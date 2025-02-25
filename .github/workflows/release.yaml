@@ -64,6 +64,26 @@ jobs:
           --file jobs.kicad_jobset 
           ${{ env.projectName }}.kicad_pro
 
+      # JLCPCB needs a bunch of cleanup. First, fix the headers in the position files.
+      - name: JLCPCB - Update position file headers
+        run: >
+          sed -i 
+          's/Ref,Val,Package,PosX,PosY,Rot,Side/Designator,Value,Footprint,X,Y,Rotation,Layer/'
+          ${{ env.outputFolder }}/JLCPCB/${{ env.projectName }}-all-pos.csv
+
+      # Then zip the gerbers and delete the gerber folder after.
+      - name: JLCPCB - Zip gerbers
+        run: >
+          zip -rm
+          ${{ env.outputFolder }}/JLCPCB/${{ env.projectName}}-gerbers-JLCPCB.zip
+          ${{ env.outputFolder}}/JLCPCB/gerbers/* 
+          && rmdir ${{ env.outputFolder }}/JLCPCB/gerbers
+
+      - name: JLCPCB - Zip upload file
+        run: >
+          zip -r ${{ env.outputFolder }}/${{ env.projectName }}-JLCPCB.zip
+          ${{ env.outputFolder}}/JLCPCB/* 
+
       # Upload the files to the release if this is an actual release.
       - name: Upload release files
         uses: softprops/action-gh-release@v2

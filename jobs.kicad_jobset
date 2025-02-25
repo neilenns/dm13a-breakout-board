@@ -310,7 +310,7 @@
         "negate_bottom_x": false,
         "output_filename": " ${PROJECTNAME}.csv",
         "side": "both",
-        "single_file": false,
+        "single_file": true,
         "smd_only": false,
         "units": "mm",
         "use_drill_place_file_origin": true
@@ -334,21 +334,6 @@
       "type": "folder"
     },
     {
-      "description": "JLCPCB",
-      "id": "f91336d3-b2ff-48d8-b9b3-7eec61c2327e",
-      "only": [
-        "3cbab78e-22fd-4b88-834f-6339eb7427c7",
-        "4e301dc8-2751-45f4-bd99-218f20f805ab",
-        "8aca83ec-f633-44c1-974b-b0cab3b30080",
-        "bef011ad-c1c5-4cf8-b0ac-411a48af88ae"
-      ],
-      "settings": {
-        "format": "zip",
-        "output_path": "release/${PROJECTNAME}-JLCPCB.zip"
-      },
-      "type": "archive"
-    },
-    {
       "description": "Documentation",
       "id": "194afab6-179d-4ed7-ba34-ab9f855b6282",
       "only": [
@@ -362,6 +347,30 @@
         "output_path": "release/${PROJECTNAME}-documentation.zip"
       },
       "type": "archive"
+    },
+    {
+      "description": "JLCPCB - Gerbers and drill",
+      "id": "1ca095a4-61ed-4d53-a16f-e651a9c19594",
+      "only": [
+        "3cbab78e-22fd-4b88-834f-6339eb7427c7",
+        "4e301dc8-2751-45f4-bd99-218f20f805ab"
+      ],
+      "settings": {
+        "output_path": "release/JLCPCB"
+      },
+      "type": "folder"
+    },
+    {
+      "description": "JLCPCB - BOM and CPL",
+      "id": "1370b3f8-5b0d-480e-be37-0b73e856fcae",
+      "only": [
+        "8aca83ec-f633-44c1-974b-b0cab3b30080",
+        "bef011ad-c1c5-4cf8-b0ac-411a48af88ae"
+      ],
+      "settings": {
+        "output_path": "release/JLCPCB"
+      },
+      "type": "folder"
     }
   ]
 }
