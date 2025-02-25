@@ -55,12 +55,14 @@ jobs:
         uses: restackio/update-json-file-action@2.1
         with:
           file: ${{ env.projectName }}.kicad_pro
-          fields: "{'text_variables.DATE': '${{ env.DATE }}', 'text_variables.VERSION': '${{ env.version }}'}"
+          fields: "{\"text_variables.DATE\": \"${{ env.DATE }}\", \"text_variables.VERSION\": \"${{ env.version }}\"}"
 
       # Run the KiCad jobset
       - name: Run KiCad jobset
         run: >
-          kicad-cli jobset run --file jobs.kicad_jobset ${{ env.projectName }}.kicad_pro
+          kicad-cli jobset run 
+          --file jobs.kicad_jobset 
+          ${{ env.projectName }}.kicad_pro
 
       # Upload the files to the release if this is an actual release
       - name: Upload release files
