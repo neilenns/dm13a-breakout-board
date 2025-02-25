@@ -54,8 +54,7 @@ jobs:
         uses: montudor/action-zip@v1
 
       - name: Zip output
-        run: zip -qq -r ${{ env.projectName }}.zip .
-        working-directory: ${{ env.OutputFolder }}
+        run: zip -qq -r ${{ env.projectName }}.zip ${{ env.OutputFolder }}
 
       # Upload all the zip files to the release.
       - name: Upload release files
