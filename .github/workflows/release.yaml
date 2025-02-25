@@ -22,7 +22,7 @@ jobs:
     defaults:
         run:
           shell: bash
-          
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -50,10 +50,7 @@ jobs:
 
       - name: Generate BOM
         run: |
-          kicad-cli sch export bom \
-          --preset JLCPCB \
-          --output ${{ env.outputFolder }}/${{ env.projectName }}.csv \ 
-          ${{ env.projectName }}.kicad_sch
+          kicad-cli sch export bom --preset JLCPCB --output ${{ env.outputFolder }}/${{ env.projectName }}.csv ${{ env.projectName }}.kicad_sch
     
       - name: Generate gerbers
         run: |
