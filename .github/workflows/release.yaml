@@ -49,12 +49,9 @@ jobs:
         run: |
           kicad-cli sch export bom --preset JLCPCB --output ${{ env.outputFolder }}/${{ env.projectName }}.csv ${{ env.projectName }}.kicad_sch
 
-      # Zip the output
-      - name: Install zip
-        uses: montudor/action-zip@v1
-
       - name: Zip output
-        run: zip -qq -r ${{ env.projectName }}.zip ${{ env.outputFolder }}
+        run: zip -qq -r ${{ env.projectName }}.zip .
+        working-directory: ${{ env.outputFolder }}
 
       # Upload all the zip files to the release.
       - name: Upload release files
