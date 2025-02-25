@@ -80,7 +80,7 @@ jobs:
       - name: JLCPCB - Update position file headers
         run: >
           sed -i 
-          's/Ref,Val,Package,PosX,PosY,Rot,Side/Designator,Value,Footprint,X,Y,Rotation,Layer/'
+          's/Ref,Val,Package,PosX,PosY,Rot,Side/Designator,Val,Package,Mid X,Mid Y,Rotation,Layer/'
           ${{ env.outputFolder }}/JLCPCB/${{ env.projectName }}-all-pos.csv
 
       # Then zip the gerbers and delete the gerber folder after.
