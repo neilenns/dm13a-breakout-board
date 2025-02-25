@@ -47,24 +47,27 @@ jobs:
 
       - name: Generate BOM
         run: |
-          kicad-cli sch export bom --preset JLCPCB --output ${{ env.outputFolder }}/${{ env.projectName }}.csv ${{ env.projectName }}.kicad_sch
-
+          kicad-cli sch export bom \
+          --preset JLCPCB \
+          --output ${{ env.outputFolder }}/${{ env.projectName }}.csv \ 
+          ${{ env.projectName }}.kicad_sch
+    
       - name: Generate gerbers
         run: |
             kicad-cli pcb export gerbers \
-            --output ${{ env.outputFolder }}/gerbers \
             -D VERSION=${{ env.version }} \
             -D DATE=${{ env.DATE }} \
             --layers F.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts \
             --subtract-soldermask \
-            ${{ env.projectName }}.kicad_pcb
-
-        - name: Generate drill files
-          run: |
-            kicad-cli pcb export drill \
-            --generate-map \
             --output ${{ env.outputFolder }}/gerbers \
             ${{ env.projectName }}.kicad_pcb
+
+      - name: Generate drill files
+        run: |
+          kicad-cli pcb export drill \
+          --generate-map \
+          --output ${{ env.outputFolder }}/gerbers \
+          ${{ env.projectName }}.kicad_pcb
           
       - name: Zip output
         run: zip -qq -r ${{ env.projectName }}.zip .
