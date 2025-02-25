@@ -86,16 +86,16 @@ jobs:
       # Then zip the gerbers and delete the gerber folder after.
       - name: JLCPCB - Zip gerbers
         run: >
-          zip -rm
-          ${{ env.outputFolder }}/JLCPCB/${{ env.projectName}}-gerbers-JLCPCB.zip
-          ${{ env.outputFolder}}/JLCPCB/gerbers/* 
-          && rmdir ${{ env.outputFolder }}/JLCPCB/gerbers
+          cd ${{ env.outputFolder }}/JLCPCB/gerbers && 
+          zip -r ../${{ env.projectName}}-gerbers-JLCPCB.zip . && 
+          cd .. && 
+          rm -rf gerbers
 
       - name: JLCPCB - Zip upload file
         run: >
-          zip -r ${{ env.outputFolder }}/${{ env.projectName }}-JLCPCB.zip
-          ${{ env.outputFolder}}/JLCPCB/* 
-
+          cd ${{ env.outputFolder}}/JLCPCB &&
+          zip -r ../${{ env.projectName }}-JLCPCB.zip . 
+          
       # ------------------------------
       # Asset upload
       # ------------------------------
