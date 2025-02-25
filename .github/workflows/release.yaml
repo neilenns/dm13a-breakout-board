@@ -94,8 +94,10 @@ jobs:
       - name: JLCPCB - Zip upload file
         run: >
           cd ${{ env.outputFolder}}/JLCPCB &&
-          zip -r ../${{ env.projectName }}-JLCPCB.zip . 
-          
+          zip -r ../${{ env.projectName }}-JLCPCB.zip .
+          cd .. &&
+          rm -rf JLCPCB
+
       # ------------------------------
       # Asset upload
       # ------------------------------
