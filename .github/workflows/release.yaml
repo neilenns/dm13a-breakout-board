@@ -29,6 +29,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ------------------------------
+      # Variable preparation
+      # ------------------------------
+
       - name: Get current date
         id: date
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
@@ -57,12 +61,46 @@ jobs:
           file: ${{ env.projectName }}.kicad_pro
           fields: "{\"text_variables.DATE\": \"${{ env.DATE }}\", \"text_variables.VERSION\": \"${{ env.version }}\"}"
 
+      # ------------------------------
+      # Output generation
+      # ------------------------------
+
       # Run the KiCad jobset.
       - name: Run KiCad jobset
         run: >
           kicad-cli jobset run 
           --file jobs.kicad_jobset 
           ${{ env.projectName }}.kicad_pro
+
+      # ------------------------------
+      # --- JLCPCB submissions cleanup
+      # ------------------------------
+      
+      # First, fix the headers in the position files.
+      - name: JLCPCB - Update position file headers
+        run: >
+          sed -i 
+          's/Ref,Val,Package,PosX,PosY,Rot,Side/Designator,Val,Package,Mid X,Mid Y,Rotation,Layer/'
+          ${{ env.outputFolder }}/JLCPCB/${{ env.projectName }}-all-pos.csv
+
+      # Then zip the gerbers and delete the gerber folder after.
+      - name: JLCPCB - Zip gerbers
+        run: >
+          cd ${{ env.outputFolder }}/JLCPCB/gerbers && 
+          zip -r ../${{ env.projectName}}-gerbers-JLCPCB.zip . && 
+          cd .. && 
+          rm -rf gerbers
+
+      - name: JLCPCB - Zip upload file
+        run: >
+          cd ${{ env.outputFolder}}/JLCPCB &&
+          zip -r ../${{ env.projectName }}-JLCPCB.zip . &&
+          cd .. &&
+          rm -rf JLCPCB
+
+      # ------------------------------
+      # Asset upload
+      # ------------------------------
 
       # Upload the files to the release if this is an actual release.
       - name: Upload release files

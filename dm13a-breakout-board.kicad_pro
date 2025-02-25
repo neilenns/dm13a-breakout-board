@@ -496,7 +496,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
-    "bom_export_filename": "${PROJECTNAME}.csv",
+    "bom_export_filename": "${PROJECTNAME}-bom.csv",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -586,7 +586,7 @@
         ],
         "filter_string": "",
         "group_symbols": true,
-        "include_excluded_from_bom": true,
+        "include_excluded_from_bom": false,
         "name": "JLCPCB",
         "sort_asc": true,
         "sort_field": "Reference"
@@ -670,7 +670,7 @@
       ],
       "filter_string": "",
       "group_symbols": true,
-      "include_excluded_from_bom": true,
+      "include_excluded_from_bom": false,
       "name": "",
       "sort_asc": true,
       "sort_field": "Reference"
