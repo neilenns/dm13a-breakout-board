@@ -46,7 +46,7 @@ jobs:
       - name: Store GitHub release version
         id: save_github_version
         run: echo "version=${{ inputs.version }}" >> $GITHUB_ENV
-        if: !startsWith(github.ref, 'refs/tags/')
+        if: "!startsWith(github.ref, 'refs/tags/')"
 
       # Generate the various files
       - name: Generate PDF
