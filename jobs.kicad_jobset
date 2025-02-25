@@ -326,11 +326,10 @@
       "description": "Schematic",
       "id": "894f0312-b15d-4c27-ab7d-ed2ad12cf929",
       "only": [
-        "c8f5f286-2d49-45ac-a251-462806b995fc",
-        "f59d9ff1-03eb-458d-84f8-f54723b24570"
+        "c8f5f286-2d49-45ac-a251-462806b995fc"
       ],
       "settings": {
-        "output_path": "release/documentation"
+        "output_path": "release/"
       },
       "type": "folder"
     },
