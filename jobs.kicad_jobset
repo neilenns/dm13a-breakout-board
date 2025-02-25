@@ -13,7 +13,7 @@
         "hpgl_pen_size": 1.016,
         "hpgl_plot_origin": "A3",
         "min_pen_width": 847,
-        "output_filename": " ${PROJECTNAME}-schematic.pdf",
+        "output_filename": "${PROJECTNAME}-schematic.pdf",
         "page_size": "auto",
         "pdf_hierarchical_links": true,
         "pdf_metadata": true,

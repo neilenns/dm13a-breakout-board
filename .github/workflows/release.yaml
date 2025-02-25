@@ -73,7 +73,7 @@ jobs:
         with:
           files: |
             ${{ env.outputFolder }}/${{ env.projectName }}-schematic.pdf
-            ${{ env.outputFolder }}/${{ env.projectName }}-documentation.pdf
+            ${{ env.outputFolder }}/${{ env.projectName }}-documentation.zip
             ${{ env.outputFolder }}/${{ env.projectName }}-JLCPCB.zip
 
       # Attach the artifacts to the workflow run if this is not a release.
