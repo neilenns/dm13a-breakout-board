@@ -1,7 +1,7 @@
 {
   "jobs": [
     {
-      "description": "",
+      "description": "Export schematic",
       "id": "c8f5f286-2d49-45ac-a251-462806b995fc",
       "settings": {
         "black_and_white": false,
@@ -25,7 +25,138 @@
       "type": "sch_export_plot_pdf"
     },
     {
-      "description": "",
+      "description": "Export 3D model",
+      "id": "f59d9ff1-03eb-458d-84f8-f54723b24570",
+      "settings": {
+        "board_only": false,
+        "board_outlines_chaining_epsilon": 0.01,
+        "cut_vias_in_body": false,
+        "description": "",
+        "export_board_body": true,
+        "export_components": true,
+        "export_inner_copper": false,
+        "export_pads": false,
+        "export_silkscreen": true,
+        "export_soldermask": true,
+        "export_tracks": false,
+        "export_zones": false,
+        "fill_all_vias": false,
+        "format": "step",
+        "fuse_shapes": false,
+        "include_dnp": true,
+        "include_unspecified": true,
+        "occt_format": 0,
+        "optimize_step": true,
+        "output_filename": "${PROJECTNAME}.step",
+        "overwrite": false,
+        "subst_models": true,
+        "use_drill_origin": false,
+        "use_grid_origin": false,
+        "user_origin.x": 75.0,
+        "user_origin.y": 75.0,
+        "vrml_model_dir": "",
+        "vrml_relative_paths": false
+      },
+      "type": "pcb_export_3d"
+    },
+    {
+      "description": "Render PCB - top",
+      "id": "438cb21c-fb33-45e9-81cd-77bb207c084e",
+      "settings": {
+        "bg_style": "default",
+        "description": "",
+        "floor": false,
+        "format": "png",
+        "height": 2160,
+        "light_bottom_intensity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "light_camera_intensity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "light_side_elevation": 60,
+        "light_side_intensity": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "light_top_intensity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "output_filename": "${PROJECTNAME}-top.png",
+        "pan_x": 0.0,
+        "pan_y": 0.0,
+        "pan_z": 0.0,
+        "perspective": false,
+        "pivot_x": 0.0,
+        "pivot_y": 0.0,
+        "pivot_z": 0.0,
+        "quality": "basic",
+        "rotation_x": 0.0,
+        "rotation_y": 0.0,
+        "rotation_z": 0.0,
+        "side": "top",
+        "width": 3840,
+        "zoom": 1.0
+      },
+      "type": "pcb_render"
+    },
+    {
+      "description": "Render PCB - bottom",
+      "id": "938d6a14-c621-4733-8c3c-5966d9b208a2",
+      "settings": {
+        "bg_style": "default",
+        "description": "",
+        "floor": false,
+        "format": "png",
+        "height": 2160,
+        "light_bottom_intensity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "light_camera_intensity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "light_side_elevation": 60,
+        "light_side_intensity": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "light_top_intensity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "output_filename": "${PROJECTNAME}-bottom.png",
+        "pan_x": 0.0,
+        "pan_y": 0.0,
+        "pan_z": 0.0,
+        "perspective": false,
+        "pivot_x": 0.0,
+        "pivot_y": 0.0,
+        "pivot_z": 0.0,
+        "quality": "basic",
+        "rotation_x": 0.0,
+        "rotation_y": 0.0,
+        "rotation_z": 0.0,
+        "side": "top",
+        "width": 3840,
+        "zoom": 1.0
+      },
+      "type": "pcb_render"
+    },
+    {
+      "description": "Export gerbers- JLCPCB",
       "id": "3cbab78e-22fd-4b88-834f-6339eb7427c7",
       "settings": {
         "description": "",
@@ -91,7 +222,7 @@
       "type": "pcb_export_gerbers"
     },
     {
-      "description": "",
+      "description": "Export drill data - JLCPCB",
       "id": "4e301dc8-2751-45f4-bd99-218f20f805ab",
       "settings": {
         "description": "",
@@ -111,7 +242,7 @@
       "type": "pcb_export_drill"
     },
     {
-      "description": "",
+      "description": "Export BOM - JLCPCB",
       "id": "8aca83ec-f633-44c1-974b-b0cab3b30080",
       "settings": {
         "bom_format_preset_name": "CSV",
@@ -168,7 +299,7 @@
       "type": "sch_export_bom"
     },
     {
-      "description": "",
+      "description": "Export CPL - JLCPCB",
       "id": "bef011ad-c1c5-4cf8-b0ac-411a48af88ae",
       "settings": {
         "description": "",
@@ -195,10 +326,11 @@
       "description": "Schematic",
       "id": "894f0312-b15d-4c27-ab7d-ed2ad12cf929",
       "only": [
-        "c8f5f286-2d49-45ac-a251-462806b995fc"
+        "c8f5f286-2d49-45ac-a251-462806b995fc",
+        "f59d9ff1-03eb-458d-84f8-f54723b24570"
       ],
       "settings": {
-        "output_path": "release"
+        "output_path": "release/documentation"
       },
       "type": "folder"
     },
@@ -213,7 +345,22 @@
       ],
       "settings": {
         "format": "zip",
-        "output_path": "release/${PROJECTNAME}-jlcpcb.zip"
+        "output_path": "release/${PROJECTNAME}-JLCPCB.zip"
+      },
+      "type": "archive"
+    },
+    {
+      "description": "Documentation",
+      "id": "194afab6-179d-4ed7-ba34-ab9f855b6282",
+      "only": [
+        "c8f5f286-2d49-45ac-a251-462806b995fc",
+        "f59d9ff1-03eb-458d-84f8-f54723b24570",
+        "438cb21c-fb33-45e9-81cd-77bb207c084e",
+        "938d6a14-c621-4733-8c3c-5966d9b208a2"
+      ],
+      "settings": {
+        "format": "zip",
+        "output_path": "release/${PROJECTNAME}-documentation.zip"
       },
       "type": "archive"
     }
