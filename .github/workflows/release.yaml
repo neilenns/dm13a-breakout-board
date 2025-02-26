@@ -116,7 +116,9 @@ jobs:
 
       - name: Automerge the pull request
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
-        run: gh pr merge --merge --auto "${{ steps.create-pr.outputs.pull-request-number }}"
+        run: |
+          git config --global --add safe.directory "${GITHUB_WORKSPACE}"
+          gh pr merge --merge --auto "${{ steps.create-pr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
