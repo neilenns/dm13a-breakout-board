@@ -102,15 +102,19 @@ jobs:
       # Asset upload
       # ------------------------------
 
-      - name: Commit and push documentation images
+      - name: Create a PR for the doc images
+        id: create-pr
+        uses: peter-evans/create-pull-request@v7
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global --add safe.directory "${GITHUB_WORKSPACE}"
-          git add ./docs
-          git commit -m "chore: Update generated board images for release"
-          git push origin main
+        with:
+          title: Update readme images
+          add-paths: |
+            docs/
+
+      - name: Automerge the pull request
+        run: gh pr merge --merge --auto "${{ steps.create-pr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
 
       # Upload the files to the release if this is an actual release.
       - name: Upload release files
