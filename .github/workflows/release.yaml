@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write  # Required to push changes to the repo
+  pull-requests: write
 
 env:
   outputFolder: "release"
