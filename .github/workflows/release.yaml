@@ -20,7 +20,7 @@ env:
   date: "not set" # This gets set by the date step
   version: "not set" # This gets set by the get_github_version or workflow_dispatch input
   Timezone: "America/Los_Angeles"
-  GH_TOKEN: ${{ github.token }} # Required for the gh cli to automerge
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for the gh cli to work
 
 jobs:
   FabricationAndDocumentation:
