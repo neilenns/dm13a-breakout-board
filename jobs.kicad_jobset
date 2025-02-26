@@ -149,7 +149,7 @@
         "rotation_x": 0.0,
         "rotation_y": 0.0,
         "rotation_z": 0.0,
-        "side": "top",
+        "side": "bottom",
         "width": 3840,
         "zoom": 1.0
       },
@@ -369,6 +369,18 @@
       ],
       "settings": {
         "output_path": "release/JLCPCB"
+      },
+      "type": "folder"
+    },
+    {
+      "description": "Doc renders",
+      "id": "9e299cec-9cd9-4b6c-b87b-c86d452f6596",
+      "only": [
+        "438cb21c-fb33-45e9-81cd-77bb207c084e",
+        "938d6a14-c621-4733-8c3c-5966d9b208a2"
+      ],
+      "settings": {
+        "output_path": "docs"
       },
       "type": "folder"
     }
