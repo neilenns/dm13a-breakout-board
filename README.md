@@ -11,7 +11,7 @@ Highlights:
 * A GitHub [workflow](https://github.com/neilenns/dm13a-breakout-board/blob/main/.github/workflows/release.yaml) runs when a GitHub release is created, or when triggered manually, to produce all the output files. The version variable is set to the GitHub release version and the date stamp is set to the year, month, and day of the GitHub release.
 * Output files are modified by the workflow to match the JLCPCB upload requirements.
 * The completed outputs are uploaded to the [release](https://github.com/neilenns/dm13a-breakout-board/releases) for easy access.
-* Board images are automatically checked in to the docs directory on the main branch for use in this readme.
+* Board images are automatically checked in to the docs directory via an auto-merged pull request, for use in this readme.
 
 ![Front of board](docs/dm13a-breakout-board-top.png)
 ![Back of board](docs/dm13a-breakout-board-bottom.png)
