@@ -3316,7 +3316,7 @@
 		(uuid "f5bbfcfa-a891-47db-b896-6a9b803485ed")
 	)
 	(gr_text "${VERSION} ${DATE}"
-		(at 66.5 98 0)
+		(at 75 98 0)
 		(layer "F.SilkS")
 		(uuid "50ef0e08-db7e-4446-bf33-f318e941f08f")
 		(effects
@@ -3324,7 +3324,7 @@
 				(size 1 1)
 				(thickness 0.1)
 			)
-			(justify left bottom)
+			(justify bottom)
 		)
 	)
 	(segment
