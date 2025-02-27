@@ -11,13 +11,14 @@ on:
         default: "pre-release"
 
 permissions:
-  contents: write  # Required to push changes to the repo
+  contents: write # Required to push changes to the repo
   pull-requests: write
 
 env:
   outputFolder: "release"
   projectName: "${{ github.event.repository.name }}"
   date: "not set" # This gets set by the date step
+  shortSHA: "not set" # This gets set by a step in the workflow
   version: "not set" # This gets set by the get_github_version or workflow_dispatch input
   Timezone: "America/Los_Angeles"
 
@@ -43,6 +44,9 @@ jobs:
 
       # Get the version of the GitHub release for use later. This is only valid
       # when run in a release context.
+      - name: Get short commit hash
+        run: echo "shortSHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
       - name: Get GitHub release version
         id: get_github_version
         uses: dhkatz/get-version-action@v3.0.0
@@ -50,20 +54,20 @@ jobs:
 
       - name: Store GitHub release version
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
-        run: echo "version=${{ steps.get_github_version.outputs.version }}" >> $GITHUB_ENV
+        run: echo "version=${{ steps.get_github_version.outputs.version }} (${{ env.shortSHA }})" >> $GITHUB_ENV
 
       # Stores the provided version from a manual run of the workflow in the environment variable
       # so it is available to the rest of the workflow.
       - name: Store GitHub release version
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-        run: echo "version=${{ inputs.version }}" >> $GITHUB_ENV
+        run: echo "version=${{ inputs.version }} (${{ env.shortSHA }})" >> $GITHUB_ENV
 
       # Update variables in the project file since variables can't be set on the job command.
       - name: Update project variables
         uses: restackio/update-json-file-action@2.1
         with:
           file: ${{ env.projectName }}.kicad_pro
-          fields: "{\"text_variables.DATE\": \"${{ env.DATE }}\", \"text_variables.VERSION\": \"${{ env.version }}\"}"
+          fields: '{"text_variables.DATE": "${{ env.DATE }}", "text_variables.VERSION": "${{ env.version }}"}'
 
       # ------------------------------
       # Output generation
@@ -76,7 +80,7 @@ jobs:
       # ------------------------------
       # --- JLCPCB submissions cleanup
       # ------------------------------
-      
+
       # First, fix the headers in the position files.
       - name: JLCPCB - Update position file headers
         run: >
