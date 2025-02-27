@@ -78,7 +78,9 @@ jobs:
 
       # Run the KiCad jobset.
       - name: Run KiCad jobset
-        run: kicad-cli jobset run --file jobs.kicad_jobset ${{ env.projectName }}.kicad_pro
+        run: |
+          mkdir -p release/JLCPCB
+          kicad-cli jobset run --file jobs.kicad_jobset ${{ env.projectName }}.kicad_pro
 
       # ------------------------------
       # --- JLCPCB submissions cleanup
