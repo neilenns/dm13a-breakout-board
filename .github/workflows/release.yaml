@@ -118,6 +118,7 @@ jobs:
           title: Update readme images
           branch: create-pull-request/update-doc-images
           base: main
+          labels: ignore-for-release-notes
           add-paths: |
             docs/*.png
 
