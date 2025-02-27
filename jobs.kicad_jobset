@@ -348,17 +348,18 @@
       },
       "type": "archive"
     },
-    {
+        {
       "description": "JLCPCB - Gerbers and drill",
-      "id": "1ca095a4-61ed-4d53-a16f-e651a9c19594",
+      "id": "b8868886-175a-42ee-86ff-3dc17280c014",
       "only": [
         "3cbab78e-22fd-4b88-834f-6339eb7427c7",
         "4e301dc8-2751-45f4-bd99-218f20f805ab"
       ],
       "settings": {
-        "output_path": "release/JLCPCB"
+        "format": "zip",
+        "output_path": "release/JLCPCB/${PROJECTNAME}-gerbers.zip"
       },
-      "type": "folder"
+      "type": "archive"
     },
     {
       "description": "JLCPCB - BOM and CPL",

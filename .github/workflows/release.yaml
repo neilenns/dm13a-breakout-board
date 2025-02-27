@@ -84,20 +84,12 @@ jobs:
       # --- JLCPCB submissions cleanup
       # ------------------------------
 
-      # First, fix the headers in the position files.
+      # Fix the headers in the position files.
       - name: JLCPCB - Update position file headers
         run: >
           sed -i 
           's/Ref,Val,Package,PosX,PosY,Rot,Side/Designator,Val,Package,Mid X,Mid Y,Rotation,Layer/'
           ${{ env.outputFolder }}/JLCPCB/${{ env.projectName }}-all-pos.csv
-
-      # Then zip the gerbers and delete the gerber folder after.
-      - name: JLCPCB - Zip gerbers
-        run: |
-          cd ${{ env.outputFolder }}/JLCPCB/gerbers 
-          zip -r ../${{ env.projectName}}-gerbers-JLCPCB.zip . 
-          cd ..
-          rm -rf gerbers
 
       - name: JLCPCB - Zip upload file
         run: |
