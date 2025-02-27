@@ -39,3 +39,5 @@ Copy the following two files into the same location in your repository:
 In your project, use the `VERSION` variable wherever the version number should get placed, and the `DATE` variable wherever the date should be placed.
 
 To make a new release simply use the GitHub release feature. The resulting files will get attached to the release, and the updated board images will be merged into the `docs/` folder of the repo.
+
+Don't forget that KiCad has [integrated git commands](https://docs.kicad.org/9.0/en/kicad/kicad.html#git_integration) for committing and pushing changes!
