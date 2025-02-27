@@ -34,6 +34,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Mark repository as safe for git commands
+        run: git config --global --add safe.directory "${GITHUB_WORKSPACE}"
+
       # ------------------------------
       # Variable preparation
       # ------------------------------
@@ -120,9 +123,7 @@ jobs:
 
       - name: Automerge the pull request
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
-        run: |
-          git config --global --add safe.directory "${GITHUB_WORKSPACE}"
-          gh pr merge --squash --auto "${{ steps.create-pr.outputs.pull-request-number }}"
+        run: gh pr merge --squash --auto "${{ steps.create-pr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
