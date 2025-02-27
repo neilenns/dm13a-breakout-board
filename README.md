@@ -4,14 +4,20 @@ Breakout board for the DM13A LED driver, for use with MobiFlight. This is comple
 
 Highlights:
 
-* A VSCode devcontainer is included that includes the `kicad-cli` command for local development.
-* A `tasks.json` file is included to enable quick local testing of the jobset generation.
-* Outputs are defined using KiCad [jobsets](https://docs.kicad.org/9.0/en/kicad/kicad.html#jobsets).
-* Variables are used to specify a version and date stamp. These are used in the sheet data blocks as well as the silkscreen on the board.
-* A GitHub [workflow](https://github.com/neilenns/dm13a-breakout-board/blob/main/.github/workflows/release.yaml) runs when a GitHub release is created, or when triggered manually, to produce all the output files. The version variable is set to the GitHub release version and the date stamp is set to the year, month, and day of the GitHub release.
-* Output files are modified by the workflow to match the JLCPCB upload requirements.
-* The completed outputs are uploaded to the [release](https://github.com/neilenns/dm13a-breakout-board/releases) for easy access.
-* Board images are automatically checked in to the docs directory via an auto-merged pull request, for use in this readme.
+- A VSCode devcontainer is included that includes the `kicad-cli` command for local development.
+- A `tasks.json` file is included to enable quick local testing of the jobset generation.
+- Outputs are defined using KiCad [jobsets](https://docs.kicad.org/9.0/en/kicad/kicad.html#jobsets).
+- Variables are used to specify a version and date stamp. These are used in the sheet data blocks as well as the silkscreen on the board.
+- A GitHub [workflow](https://github.com/neilenns/dm13a-breakout-board/blob/main/.github/workflows/release.yaml) runs when a GitHub release is created, or when triggered manually, to produce all the output files. The version variable is set to the GitHub release version and the date stamp is set to the year, month, and day of the GitHub release.
+- Output files are modified by the workflow to match the JLCPCB upload requirements.
+- The completed outputs are uploaded to the [release](https://github.com/neilenns/dm13a-breakout-board/releases) for easy access.
+- Board images are automatically checked in to the docs directory via an auto-merged pull request, for use in this readme.
+
+Generated outputs:
+
+- [Schematic](https://github.com/neilenns/dm13a-breakout-board/releases/latest/download/dm13a-breakout-board-schematic.pdf)
+- [Documentation zip](https://github.com/neilenns/dm13a-breakout-board/releases/latest/download/dm13a-breakout-board-documentation.zip), including schematic and PCB images
+- [JLCPCB submission zip](https://github.com/neilenns/dm13a-breakout-board/releases/latest/download/dm13a-breakout-board-JLCPCB.zip), including gerbers, drill position, BOM, and CPL files
 
 ![Front of board](docs/dm13a-breakout-board-top.png)
 ![Back of board](docs/dm13a-breakout-board-bottom.png)
