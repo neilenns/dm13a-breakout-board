@@ -136,7 +136,7 @@ jobs:
 
       # Attach the artifacts to the workflow run if this is not a release.
       - name: Attach artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         with:
           path: ${{ env.outputFolder }}/
