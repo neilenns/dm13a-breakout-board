@@ -124,7 +124,7 @@ jobs:
 
       # Upload the files to the release if this is an actual release.
       - name: Upload release files
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
